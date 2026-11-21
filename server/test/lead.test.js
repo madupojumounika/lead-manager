@@ -1,9 +1,16 @@
 import { describe, it, beforeAll, afterAll, beforeEach, expect } from 'vitest';
 import request from 'supertest';
 import mongoose from 'mongoose';
+import fs from 'fs';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import app from '../src/app.js';
 import Lead from '../src/models/Lead.js';
+
+// Use local MongoDB binary if available to avoid any network downloads
+const localBinary = 'C:\\Program Files\\MongoDB\\Server\\8.2\\bin\\mongod.exe';
+if (fs.existsSync(localBinary)) {
+  process.env.MONGOMS_SYSTEM_BINARY = localBinary;
+}
 
 let mongoServer;
 
@@ -11,11 +18,13 @@ beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const uri = mongoServer.getUri();
   await mongoose.connect(uri);
-});
+}, 60000);
 
 afterAll(async () => {
   await mongoose.disconnect();
-  await mongoServer.stop();
+  if (mongoServer) {
+    await mongoServer.stop();
+  }
 });
 
 beforeEach(async () => {
@@ -329,11 +338,11 @@ describe('Lead Manager API Tests', () => {
   describe('GET /api/dashboard/stats', () => {
     it('should calculate accurate counts from database', async () => {
       await Lead.create([
-        { name: 'A', email: 'a@x.com', phone: '111', company: 'X', source: 'Website', status: 'New' },
-        { name: 'B', email: 'b@x.com', phone: '222', company: 'X', source: 'Website', status: 'New' },
-        { name: 'C', email: 'c@x.com', phone: '333', company: 'X', source: 'Website', status: 'Contacted' },
-        { name: 'D', email: 'd@x.com', phone: '444', company: 'X', source: 'Website', status: 'Qualified' },
-        { name: 'E', email: 'e@x.com', phone: '555', company: 'X', source: 'Website', status: 'Lost' }
+        { name: 'Lead One', email: 'lead1@example.com', phone: '+1 555-0101', company: 'Company A', source: 'Website', status: 'New' },
+        { name: 'Lead Two', email: 'lead2@example.com', phone: '+1 555-0102', company: 'Company B', source: 'Website', status: 'New' },
+        { name: 'Lead Three', email: 'lead3@example.com', phone: '+1 555-0103', company: 'Company C', source: 'Website', status: 'Contacted' },
+        { name: 'Lead Four', email: 'lead4@example.com', phone: '+1 555-0104', company: 'Company D', source: 'Website', status: 'Qualified' },
+        { name: 'Lead Five', email: 'lead5@example.com', phone: '+1 555-0105', company: 'Company E', source: 'Website', status: 'Lost' }
       ]);
 
       const res = await request(app).get('/api/dashboard/stats');
@@ -357,3 +366,4 @@ describe('Lead Manager API Tests', () => {
     });
   });
 });
+

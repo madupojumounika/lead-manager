@@ -93,3 +93,4 @@ export const Sidebar = ({ isOpen, onClose, activeNav = 'leads', onNavChange }) =
     </>
   );
 };
+

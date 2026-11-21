@@ -4,6 +4,7 @@ import { useToast } from './hooks/useToast.js';
 import { Sidebar } from './components/Layout/Sidebar.jsx';
 import { Header } from './components/Layout/Header.jsx';
 import { StatCards } from './components/Dashboard/StatCards.jsx';
+import { PipelineView } from './components/Dashboard/PipelineView.jsx';
 import { SearchFilterBar } from './components/UI/SearchFilterBar.jsx';
 import { LeadTable } from './components/Leads/LeadTable.jsx';
 import { Pagination } from './components/UI/Pagination.jsx';
@@ -281,67 +282,89 @@ export default function App() {
           onOpenSidebar={() => setSidebarOpen(true)}
           onOpenCreateModal={handleOpenCreateModal}
           apiHealthy={apiHealthy}
+          activeNav={activeNav}
         />
 
         <main className="app-content">
-          {/* Dashboard Summary Stat Cards */}
-          <StatCards
-            stats={stats}
-            currentStatusFilter={statusFilter}
-            onSelectStatusFilter={handleSelectStatusFilter}
-            isLoading={isLoadingStats}
-          />
+          {activeNav === 'dashboard' ? (
+            <PipelineView
+              stats={stats}
+              leads={leads}
+              onNavigateToLeads={(status) => {
+                if (status && status !== 'All') {
+                  setStatusFilter(status);
+                } else {
+                  setStatusFilter('All');
+                }
+                setPagination((prev) => ({ ...prev, page: 1 }));
+                setActiveNav('leads');
+              }}
+              onOpenCreateModal={handleOpenCreateModal}
+              onEditLead={handleOpenEditModal}
+              isLoading={isLoadingStats}
+            />
+          ) : (
+            <>
+              {/* Dashboard Summary Stat Cards */}
+              <StatCards
+                stats={stats}
+                currentStatusFilter={statusFilter}
+                onSelectStatusFilter={handleSelectStatusFilter}
+                isLoading={isLoadingStats}
+              />
 
-          {/* Search, Filter, Sort Toolbar */}
-          <SearchFilterBar
-            search={search}
-            onSearchChange={handleSearchChange}
-            status={statusFilter}
-            onStatusChange={(st) => {
-              setStatusFilter(st);
-              setPagination((prev) => ({ ...prev, page: 1 }));
-            }}
-            source={sourceFilter}
-            onSourceChange={(src) => {
-              setSourceFilter(src);
-              setPagination((prev) => ({ ...prev, page: 1 }));
-            }}
-            sortBy={sortBy}
-            sortOrder={sortOrder}
-            onSortChange={handleSortChange}
-            onResetFilters={handleResetFilters}
-            onRefresh={() => {
-              fetchLeads();
-              fetchStats();
-            }}
-            isLoading={isLoadingLeads}
-          />
+              {/* Search, Filter, Sort Toolbar */}
+              <SearchFilterBar
+                search={search}
+                onSearchChange={handleSearchChange}
+                status={statusFilter}
+                onStatusChange={(st) => {
+                  setStatusFilter(st);
+                  setPagination((prev) => ({ ...prev, page: 1 }));
+                }}
+                source={sourceFilter}
+                onSourceChange={(src) => {
+                  setSourceFilter(src);
+                  setPagination((prev) => ({ ...prev, page: 1 }));
+                }}
+                sortBy={sortBy}
+                sortOrder={sortOrder}
+                onSortChange={handleSortChange}
+                onResetFilters={handleResetFilters}
+                onRefresh={() => {
+                  fetchLeads();
+                  fetchStats();
+                }}
+                isLoading={isLoadingLeads}
+              />
 
-          {/* Leads Listing Table */}
-          <LeadTable
-            leads={leads}
-            isLoading={isLoadingLeads}
-            sortBy={sortBy}
-            sortOrder={sortOrder}
-            onSortChange={handleSortChange}
-            onEditLead={handleOpenEditModal}
-            onDeleteLead={handleOpenDeleteModal}
-            onStatusQuickChange={handleQuickStatusChange}
-            onOpenCreateModal={handleOpenCreateModal}
-            onResetFilters={handleResetFilters}
-            hasFilters={Boolean(
-              debouncedSearch ||
-              (statusFilter && statusFilter !== 'All') ||
-              (sourceFilter && sourceFilter !== 'All')
-            )}
-          />
+              {/* Leads Listing Table */}
+              <LeadTable
+                leads={leads}
+                isLoading={isLoadingLeads}
+                sortBy={sortBy}
+                sortOrder={sortOrder}
+                onSortChange={handleSortChange}
+                onEditLead={handleOpenEditModal}
+                onDeleteLead={handleOpenDeleteModal}
+                onStatusQuickChange={handleQuickStatusChange}
+                onOpenCreateModal={handleOpenCreateModal}
+                onResetFilters={handleResetFilters}
+                hasFilters={Boolean(
+                  debouncedSearch ||
+                  (statusFilter && statusFilter !== 'All') ||
+                  (sourceFilter && sourceFilter !== 'All')
+                )}
+              />
 
-          {/* Pagination Controls */}
-          <Pagination
-            pagination={pagination}
-            onPageChange={handlePageChange}
-            onLimitChange={handleLimitChange}
-          />
+              {/* Pagination Controls */}
+              <Pagination
+                pagination={pagination}
+                onPageChange={handlePageChange}
+                onLimitChange={handleLimitChange}
+              />
+            </>
+          )}
         </main>
       </div>
 
@@ -375,3 +398,4 @@ export default function App() {
     </div>
   );
 }
+

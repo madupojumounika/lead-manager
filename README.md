@@ -12,7 +12,7 @@ LeadFlow is built from the ground up to reflect production-grade software engine
 - **Instant Prospect Capture:** Add new leads with comprehensive contact and qualification data.
 - **Dynamic Pipeline Analytics:** Live dashboard metrics computed directly via database aggregations.
 - **Search & Multi-Dimensional Filtering:** Query leads across name, email, and company while isolating statuses and acquisition sources.
-- **End-to-End Type Safety & Validation:** Identical Zod validation schemas running on both client and server to prevent invalid states and duplicate email registrations.
+- **Dual-Layer Schema Validation:** Declarative Zod validation schemas implemented on both client (instant user feedback) and server (strict input sanitization) to eliminate invalid data states and prevent duplicate email registrations.
 - **Responsive Architecture:** Fully responsive desktop data table and mobile-optimized card layout.
 
 ---
@@ -50,16 +50,22 @@ LeadFlow is built from the ground up to reflect production-grade software engine
 - Computed through MongoDB aggregation pipelines (no hardcoded mocks).
 - Interactive cards: clicking any card instantly filters the lead list to that status.
 
+### G. Responsive Navigation & Dedicated Views
+- **Pipeline Dashboard View:** Dedicated executive view featuring stage conversion funnels, acquisition channel distributions, win rate KPIs, and a recent prospect activity table with direct link to all leads.
+- **Leads Directory View:** Full lead management view with real-time debounced search, status and source dropdown filters, multi-column sorting, pagination, and modal CRUD operations.
+- **Mobile Responsive Drawer:** Collapsible sidebar navigation optimized for smartphones and tablets.
+
 ---
 
 ## 3. Tech Stack
 
 ### Frontend
 - **Framework:** React 18+ (SPA architecture)
-- **Tooling & Bundler:** Vite (ultrafast HMR and optimized production bundling)
-- **Styling:** Custom Vanilla CSS with modern CSS custom properties (design system with deep navy typography, slate borders, and SaaS blue accents)
+- **Language:** JavaScript (ES6+ Modules)
+- **Tooling & Bundler:** Vite (fast HMR and optimized production bundling)
+- **Styling:** Custom CSS with CSS custom properties design system (deep navy typography, subtle slate borders, and SaaS blue accents)
 - **Icons:** `lucide-react` (clean, consistent stroke icons)
-- **Validation:** Zod (declarative schema parsing and error formatting)
+- **Validation:** Zod (client-side form validation and instant error feedback)
 
 ### Backend
 - **Runtime:** Node.js (v18+ / v20+ / v24+)
@@ -84,7 +90,7 @@ LeadFlow is built from the ground up to reflect production-grade software engine
 ```
                       +-----------------------------+
                       |   React 18 Single Page App  |
-                      |   (Vite, CSS Modules, Zod)  |
+                      |   (Vite, Custom CSS, Zod)   |
                       +--------------+--------------+
                                      |
                                 REST API

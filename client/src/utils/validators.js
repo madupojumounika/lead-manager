@@ -62,3 +62,4 @@ export const validateLeadForm = (data) => {
 
   return { isValid: false, errors };
 };
+

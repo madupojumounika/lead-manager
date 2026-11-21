@@ -83,7 +83,6 @@ const leadSchema = new mongoose.Schema(
 );
 
 // Indexes for fast searching and filtering
-leadSchema.index({ email: 1 }, { unique: true });
 leadSchema.index({ status: 1 });
 leadSchema.index({ source: 1 });
 leadSchema.index({ createdAt: -1 });
@@ -92,3 +91,4 @@ leadSchema.index({ name: 'text', company: 'text', email: 'text' });
 const Lead = mongoose.model('Lead', leadSchema);
 
 export default Lead;
+

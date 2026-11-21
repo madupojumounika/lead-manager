@@ -92,3 +92,4 @@ export const Pagination = ({ pagination, onPageChange, onLimitChange }) => {
     </div>
   );
 };
+

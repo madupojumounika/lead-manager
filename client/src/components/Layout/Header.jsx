@@ -1,7 +1,9 @@
 import React from 'react';
 import { Menu, UserPlus, Activity } from 'lucide-react';
 
-export const Header = ({ onOpenSidebar, onOpenCreateModal, apiHealthy = true }) => {
+export const Header = ({ onOpenSidebar, onOpenCreateModal, apiHealthy = true, activeNav = 'leads' }) => {
+  const isDashboard = activeNav === 'dashboard';
+
   return (
     <header className="app-header">
       <div className="header-left">
@@ -14,9 +16,13 @@ export const Header = ({ onOpenSidebar, onOpenCreateModal, apiHealthy = true }) 
           <Menu size={20} />
         </button>
         <div className="header-title-group">
-          <h1 className="header-title">Leads Management</h1>
+          <h1 className="header-title">
+            {isDashboard ? 'Pipeline Dashboard' : 'Leads Directory'}
+          </h1>
           <p className="header-subtitle">
-            Track, qualify, and convert prospective business clients
+            {isDashboard
+              ? 'Real-time sales conversion, stage progression, and acquisition channels'
+              : 'Track, search, qualify, and convert prospective business clients'}
           </p>
         </div>
       </div>
@@ -41,3 +47,4 @@ export const Header = ({ onOpenSidebar, onOpenCreateModal, apiHealthy = true }) 
     </header>
   );
 };
+

@@ -1,6 +1,12 @@
 import mongoose from 'mongoose';
+import fs from 'fs';
 
 let memoryServerInstance = null;
+
+const localBinary = 'C:\\Program Files\\MongoDB\\Server\\8.2\\bin\\mongod.exe';
+if (fs.existsSync(localBinary)) {
+  process.env.MONGOMS_SYSTEM_BINARY = localBinary;
+}
 
 export const connectDB = async (uriOverride = null) => {
   const primaryUri = uriOverride || process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/lead_manager';
@@ -45,3 +51,4 @@ export const disconnectDB = async () => {
     console.error('[Database] Error during disconnect:', err.message);
   }
 };
+

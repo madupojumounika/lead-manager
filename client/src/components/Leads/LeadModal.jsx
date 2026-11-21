@@ -300,3 +300,4 @@ export const LeadModal = ({ isOpen, onClose, onSubmit, initialData = null, isSub
     </div>
   );
 };
+

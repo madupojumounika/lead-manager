@@ -29,3 +29,4 @@ router.route('/:id')
 router.patch('/:id/status', validate(updateStatusSchema, 'body'), updateLeadStatus);
 
 export default router;
+

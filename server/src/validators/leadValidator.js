@@ -70,3 +70,4 @@ export const queryLeadsSchema = z.object({
   sortBy: z.enum(['createdAt', 'name', 'company', 'status', 'email']).optional().default('createdAt'),
   sortOrder: z.enum(['asc', 'desc']).optional().default('desc')
 });
+

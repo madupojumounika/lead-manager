@@ -325,3 +325,4 @@ export const LeadTable = ({
     </div>
   );
 };
+
