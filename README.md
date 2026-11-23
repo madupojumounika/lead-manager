@@ -1,110 +1,186 @@
-# LeadFlow — Lead Management CRM
+# 🚀 LeadFlow — Lead Management CRM
 
-A full-stack CRM application built for the **Full Stack Developer Screening Assignment at Meru Technosoft Pvt. Ltd.**
+<p align="center">
+  A Full-Stack Lead Management Application
+  <br />
+  <strong>Meru Technosoft Pvt. Ltd. — Full Stack Developer Screening Assignment</strong>
+</p>
 
-LeadFlow helps teams manage prospective clients, organize lead information, track sales pipeline stages, and monitor performance through a clean, responsive dashboard.
+<p align="center">
+  <img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/Node.js-Backend-339933?logo=node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/Express.js-API-000000?logo=express&logoColor=white" />
+  <img src="https://img.shields.io/badge/MongoDB-Database-47A248?logo=mongodb&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tests-21%20Passed-success" />
+</p>
 
-## Overview
+---
 
-LeadFlow provides an end-to-end lead management workflow with a React frontend, Express REST API, and MongoDB database.
+## 📌 Overview
 
-### Features
+**LeadFlow** is a full-stack CRM application designed to simplify lead management and help teams organize prospective clients, track lead progress, and monitor sales pipeline performance.
 
-- **Lead Management:** Create, view, edit, and delete leads.
-- **Lead Tracking:** Manage leads through New, Contacted, Qualified, and Lost stages.
-- **Search:** Find leads by name, email, or company.
-- **Filtering:** Filter leads by status and source.
-- **Sorting & Pagination:** Organize and navigate lead records.
-- **Dashboard:** View total leads and status-wise statistics.
-- **Form Validation:** Validate input on both frontend and backend.
-- **Duplicate Prevention:** Prevent duplicate email addresses.
-- **Responsive Design:** Interface optimized for desktop and mobile screens.
-- **API Health Check:** Monitor backend availability.
+The application provides a responsive dashboard and a complete lead management workflow using React, Node.js, Express, and MongoDB.
 
-## Tech Stack
+## ✨ Features
 
-| Frontend | Backend | Database & Testing |
-|---|---|---|
-| React 18 | Node.js | MongoDB |
-| JavaScript | Express.js | Mongoose |
-| Vite | REST API | Vitest |
-| CSS | Zod | Supertest |
-| Lucide React | Helmet, CORS | MongoDB Memory Server |
+- 👤 **Lead Management** — Create, view, edit, and delete leads.
+- 📊 **Dashboard** — View total leads and status-wise statistics.
+- 🔄 **Status Tracking** — Manage leads through New, Contacted, Qualified, and Lost stages.
+- 🔍 **Search** — Search leads by name, email, or company.
+- 🎯 **Filtering** — Filter leads by status and source.
+- ↕️ **Sorting** — Organize lead records using sorting options.
+- 📄 **Pagination** — Navigate through lead records efficiently.
+- ✅ **Form Validation** — Validate inputs on both frontend and backend.
+- 🛡️ **Duplicate Prevention** — Prevent duplicate email addresses.
+- 📱 **Responsive UI** — Interface optimized for desktop and mobile.
+- ❤️ **API Health Check** — Monitor backend availability.
 
-## Application Structure
+## 🛠️ Tech Stack
 
-\`\`\`text
+| Category | Technologies |
+|---|---|
+| Frontend | React 18, JavaScript, Vite, CSS |
+| Backend | Node.js, Express.js |
+| Database | MongoDB, Mongoose |
+| Validation | Zod |
+| API | REST API |
+| Testing | Vitest, Supertest, MongoDB Memory Server |
+| UI Icons | Lucide React |
+
+## 🏗️ System Architecture
+
+LeadFlow follows a client-server architecture. The React frontend communicates with the Express backend through REST APIs, while MongoDB handles persistent data storage.
+
+```mermaid
+flowchart TD
+    A["👤 User"] --> B["⚛️ React Frontend"]
+    B --> C["🔗 API Service"]
+    C --> D["🚀 Express REST API"]
+    D --> E["🛡️ Validation & Middleware"]
+    E --> F["🎮 Controllers"]
+    F --> G["📦 Mongoose Models"]
+    G --> H[("🍃 MongoDB")]
+
+    H --> G
+    G --> F
+    F --> D
+    D --> C
+    C --> B
+    B --> A
+```
+
+## 🔄 Application Workflow
+
+```mermaid
+flowchart TD
+    A(["Start"]) --> B["Open LeadFlow Dashboard"]
+    B --> C["View Lead Statistics"]
+    C --> D["Open Leads Directory"]
+    D --> E{"Choose an Action"}
+
+    E -->|"Add"| F["Enter Lead Details"]
+    F --> G["Validate Input"]
+    G --> H["Save New Lead"]
+
+    E -->|"Edit"| I["Update Lead Information"]
+    I --> J["Save Changes"]
+
+    E -->|"Search / Filter"| K["Find Required Leads"]
+    E -->|"Change Status"| L["Update Lead Stage"]
+    E -->|"Delete"| M["Confirm Deletion"]
+
+    H --> N["Refresh Lead List"]
+    J --> N
+    K --> N
+    L --> N
+    M --> N
+
+    N --> O(["Updated Dashboard & Lead Records"])
+```
+
+## 📁 Project Structure
+
+```text
 lead-manager/
+│
 ├── client/
 │   └── src/
-│       ├── components/     # Dashboard, leads, layout and UI
-│       ├── hooks/          # Reusable React hooks
-│       ├── services/       # API integration
-│       ├── utils/          # Validation and formatting
+│       ├── components/
+│       │   ├── Dashboard/
+│       │   ├── Leads/
+│       │   ├── Layout/
+│       │   └── UI/
+│       ├── hooks/
+│       ├── services/
+│       ├── utils/
 │       ├── App.jsx
 │       └── main.jsx
 │
 ├── server/
 │   ├── src/
-│   │   ├── config/         # Database configuration
-│   │   ├── controllers/    # Application logic
-│   │   ├── middleware/    # Validation and error handling
-│   │   ├── models/         # Mongoose schemas
-│   │   ├── routes/         # REST API routes
-│   │   ├── validators/     # Zod schemas
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── validators/
 │   │   ├── app.js
 │   │   └── server.js
-│   └── test/               # API integration tests
+│   │
+│   └── test/
 │
 ├── package.json
 └── README.md
-\`\`\`
+```
 
-## Getting Started
+## ⚙️ Getting Started
 
 ### Prerequisites
 
 - Node.js 18 or later
 - npm
-- MongoDB (local installation or MongoDB Atlas)
+- MongoDB local installation or MongoDB Atlas
 
-### 1. Clone the repository
+### 1️⃣ Clone the Repository
 
-\`\`\`bash
+```bash
 git clone https://github.com/madupojumounika/lead-manager.git
 cd lead-manager
-\`\`\`
+```
 
-### 2. Install dependencies
+### 2️⃣ Install Dependencies
 
-\`\`\`bash
+```bash
 npm install
-\`\`\`
+```
 
-### 3. Configure environment variables
+### 3️⃣ Configure Environment Variables
 
 Create the backend environment file:
 
-\`\`\`bash
+```bash
 cp server/.env.example server/.env
-\`\`\`
+```
 
 Configure `server/.env`:
 
-\`\`\`env
+```env
 PORT=5000
 NODE_ENV=development
 MONGODB_URI=mongodb://127.0.0.1:27017/lead_manager
 CLIENT_URL=http://localhost:5173
-\`\`\`
+```
 
-Update `MONGODB_URI` with your MongoDB connection string if required.
+Update the MongoDB connection string according to your environment.
 
-### 4. Start the application
+🔐 **Security:** Never commit actual `.env` files, database passwords, API keys, or secret credentials. Keep only safe example configuration files in the public repository.
 
-\`\`\`bash
+### 4️⃣ Run the Application
+
+```bash
 npm run dev
-\`\`\`
+```
 
 The frontend and backend start together.
 
@@ -113,90 +189,81 @@ The frontend and backend start together.
 | Frontend | http://localhost:5173 |
 | Backend Health | http://localhost:5000/api/health |
 
-To run them separately:
+To run services separately:
 
-\`\`\`bash
+```bash
 npm run dev:server
 npm run dev:client
-\`\`\`
+```
 
-## REST API
+## 🔌 REST API Endpoints
 
 All endpoints are prefixed with `/api`.
 
 | Method | Endpoint | Description |
 |---|---|---|
 | GET | `/api/health` | Check API health |
-| GET | `/api/leads` | List leads |
-| GET | `/api/leads/:id` | Get a lead |
-| POST | `/api/leads` | Create a lead |
-| PUT | `/api/leads/:id` | Update a lead |
+| GET | `/api/leads` | Retrieve all leads |
+| GET | `/api/leads/:id` | Retrieve a specific lead |
+| POST | `/api/leads` | Create a new lead |
+| PUT | `/api/leads/:id` | Update lead information |
 | PATCH | `/api/leads/:id/status` | Update lead status |
 | DELETE | `/api/leads/:id` | Delete a lead |
-| GET | `/api/dashboard/stats` | Get dashboard statistics |
+| GET | `/api/dashboard/stats` | Retrieve dashboard statistics |
 
-The lead listing endpoint supports search, status and source filters, sorting, and pagination.
+The lead listing endpoint supports search, filtering, sorting, and pagination.
 
-## Validation & Error Handling
+## 🧪 Testing
 
-- Frontend validation provides immediate feedback.
-- Backend validation independently checks incoming requests.
-- Duplicate email addresses are rejected.
-- Invalid IDs and missing records are handled appropriately.
-- Centralized error-handling middleware manages API errors.
+Run the backend automated test suite:
 
-## Testing
-
-Run the backend test suite:
-
-\`\`\`bash
+```bash
 npm test
-\`\`\`
+```
 
-Tests cover:
+### ✅ Verified Results
 
-- API health checks.
-- Lead creation and validation.
-- Duplicate email prevention.
-- Lead listing, search, filtering, and pagination.
-- Lead retrieval and updates.
-- Status changes and deletion.
-- Dashboard statistics.
+| Verification | Result |
+|---|---|
+| Backend automated tests | 21/21 Passed |
+| Frontend production build | Passed |
+| API health check | Passed |
+| Frontend-backend integration | Verified |
+| Lead CRUD operations | Manually Tested |
 
-### Verified Results
+Build the frontend for production:
 
-- **Backend tests:** 21/21 passed.
-- **Frontend production build:** Passed.
-- **API health check:** Passed.
-- **Frontend-backend integration:** Verified.
-- **Lead CRUD operations:** Manually tested.
-
-## Production Build
-
-Build the frontend:
-
-\`\`\`bash
+```bash
 npm run build
-\`\`\`
+```
 
 Production assets are generated in `client/dist/`.
 
-For production deployment, configure a persistent MongoDB database and set the appropriate backend and frontend environment variables.
+## 🗄️ Database Note
 
-> **Database note:** During development, the backend can fall back to an in-memory MongoDB instance if a local database is unavailable. This is temporary storage; records are lost when the server stops. Use MongoDB Atlas or another persistent MongoDB deployment for production.
+During local development, if a MongoDB connection is unavailable, the backend can automatically use an in-memory MongoDB instance as a fallback. This database is temporary, and all records are lost when the server stops.
 
-## Future Improvements
+For persistent data storage and production deployment, configure MongoDB Atlas or another persistent MongoDB database.
 
-- User authentication and role-based access.
-- Lead activity history and follow-up reminders.
-- CSV import and export.
-- Advanced analytics and reporting.
+## 🚀 Future Improvements
 
-## Author
+- 🔐 User authentication and role-based access.
+- 📝 Lead activity history and follow-up reminders.
+- 📥 CSV import and export.
+- 📈 Advanced analytics and reporting.
+
+## 👩‍💻 Author
 
 **Mounika Madupoju**
 
 Full Stack Developer Screening Assignment  
 **Meru Technosoft Pvt. Ltd.**
 
-[GitHub Profile](https://github.com/madupojumounika) · [Project Repository](https://github.com/madupojumounika/lead-manager)
+🔗 [GitHub Profile](https://github.com/madupojumounika)  
+📂 [Project Repository](https://github.com/madupojumounika/lead-manager)
+
+---
+
+<p align="center">
+  Built with ❤️ using React, Node.js, Express, and MongoDB.
+</p>
