@@ -53,50 +53,26 @@ The application provides a responsive dashboard and a complete lead management w
 LeadFlow follows a client-server architecture. The React frontend communicates with the Express backend through REST APIs, while MongoDB handles persistent data storage.
 
 ```mermaid
-flowchart TD
-    A["👤 User"] --> B["⚛️ React Frontend"]
-    B --> C["🔗 API Service"]
-    C --> D["🚀 Express REST API"]
-    D --> E["🛡️ Validation & Middleware"]
-    E --> F["🎮 Controllers"]
-    F --> G["📦 Mongoose Models"]
-    G --> H[("🍃 MongoDB")]
-
-    H --> G
-    G --> F
-    F --> D
-    D --> C
-    C --> B
-    B --> A
+flowchart LR
+    A["React Frontend"] <--> B["Express REST API"]
+    B <--> C["MongoDB"]
 ```
 
-## 🔄 Application Workflow
+**Flow:** User → React UI → REST API → Validation → Controllers → MongoDB.
+
+## 🔄 Core Workflow
 
 ```mermaid
 flowchart TD
-    A(["Start"]) --> B["Open LeadFlow Dashboard"]
-    B --> C["View Lead Statistics"]
-    C --> D["Open Leads Directory"]
-    D --> E{"Choose an Action"}
-
-    E -->|"Add"| F["Enter Lead Details"]
-    F --> G["Validate Input"]
-    G --> H["Save New Lead"]
-
-    E -->|"Edit"| I["Update Lead Information"]
-    I --> J["Save Changes"]
-
-    E -->|"Search / Filter"| K["Find Required Leads"]
-    E -->|"Change Status"| L["Update Lead Stage"]
-    E -->|"Delete"| M["Confirm Deletion"]
-
-    H --> N["Refresh Lead List"]
-    J --> N
-    K --> N
-    L --> N
-    M --> N
-
-    N --> O(["Updated Dashboard & Lead Records"])
+    A["Dashboard"] --> B["Leads Directory"]
+    B --> C{"Action"}
+    C --> D["Add / Edit"]
+    C --> E["Search / Filter"]
+    C --> F["Update Status / Delete"]
+    D --> G["API & Database"]
+    E --> G
+    F --> G
+    G --> H["Updated Lead Records"]
 ```
 
 ## 📁 Project Structure
